@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -7,9 +6,9 @@
         <groupId>br.edu.ifba.inf008</groupId>
         <artifactId>parent-project</artifactId>
         <version>1.0-SNAPSHOT</version>
-    </parent>
+        <relativePath>../pom.xml</relativePath> </parent>
 
-    <artifactId>executable</artifactId>
+    <artifactId>app</artifactId>
 
     <dependencies>
         <dependency>
@@ -17,20 +16,26 @@
             <artifactId>interfaces</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>17.0.6</version> </dependency>
+
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>17.0.6</version> </dependency>
     </dependencies>
 
     <build>
         <plugins>
-
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>3.0.0</version>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-maven-plugin</artifactId>
+                <version>0.0.8</version>
                 <configuration>
-                    <mainClass>br.edu.ifba.inf008.App</mainClass>
-		    <!--<arguments>
-                        <argument>arg1</argument>
-		    </arguments>-->
+                    <mainClass>br.edu.ifba.inf008.app.Main</mainClass>
                 </configuration>
             </plugin>
         </plugins>
