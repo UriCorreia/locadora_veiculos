@@ -1,4 +1,4 @@
-package br.edu.ifba.inf008.app;
+package br.edu.ifba.inf008;
 
 import br.edu.ifba.inf008.interfaces.IDataProvider;
 import br.edu.ifba.inf008.model.Customer;
@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 public class MariaDBProvider implements IDataProvider {
 
     // Configuração do Banco
-    private static final String URL = "jdbc:mariadb://localhost:3307/car_rental_system";
+    private static final String URL = "jdbc:mariadb://localhost:3306/car_rental_system";
     private static final String USER = "root";
     private static final String PASS = "root";
 
