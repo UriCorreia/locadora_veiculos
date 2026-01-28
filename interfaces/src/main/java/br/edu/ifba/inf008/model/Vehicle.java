@@ -2,10 +2,10 @@ package br.edu.ifba.inf008.model;
 
 public class Vehicle {
 
-    public enum VehicleType { ECONOMICO, COMPACT, SUV, LUXO, VAN, ELETRICO }
-    public enum VehicleStatus { AVAILABLE, RENTED, MAINTENANCE }
-    public enum FuelType { GASOLINE, DIESEL, ELECTRIC, HYBRID, CNG, ETHANOL }
-    public enum Transmission { MANUAL, AUTOMATIC, CVT }
+    public enum VehicleType { ECONOMY, COMPACT, SUV, LUXURY, VAN, ELECTRIC }
+    public enum VehicleStatus { AVAILABLE, RENTED, MAINTENANCE, CLEANING, RESERVED }
+    public enum FuelType { GASOLINE, DIESEL, ELECTRIC, HYBRID, CNG }
+    public enum Transmission { MANUAL, AUTOMATIC }
 
     private String id; // Placa
     private String make;
