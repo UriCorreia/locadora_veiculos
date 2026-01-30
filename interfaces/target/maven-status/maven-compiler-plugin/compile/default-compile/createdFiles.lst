@@ -1,6 +1,7 @@
 br\edu\ifba\inf008\model\Vehicle$VehicleType.class
 br\edu\ifba\inf008\model\Vehicle.class
 br\edu\ifba\inf008\interfaces\IVehiclePlugin.class
+br\edu\ifba\inf008\interfaces\IPricePlugin.class
 br\edu\ifba\inf008\interfaces\IPluginController.class
 br\edu\ifba\inf008\interfaces\IIOController.class
 br\edu\ifba\inf008\model\Customer.class

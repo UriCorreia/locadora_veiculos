@@ -4,6 +4,7 @@ C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\i
 C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\ifba\inf008\interfaces\IIOController.java
 C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\ifba\inf008\interfaces\IPlugin.java
 C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\ifba\inf008\interfaces\IPluginController.java
+C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\ifba\inf008\interfaces\IPricePlugin.java
 C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\ifba\inf008\interfaces\IReportPlugin.java
 C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\ifba\inf008\interfaces\IUIController.java
 C:\Users\Uriel\OneDrive\Documentos\microkernel\interfaces\src\main\java\br\edu\ifba\inf008\interfaces\IVehiclePlugin.java

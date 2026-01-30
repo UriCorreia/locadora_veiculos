@@ -36,8 +36,8 @@ public class MyPlugin implements IPricePlugin
 
         if (rental.getStartDate() == null || rental.getEndDate() == null) return 0.0;
 
-        long days = ChronoUnit.DAYS.between( rental.getStartDate().toLocalDateTime(),
-                                             rental.getEndDate().toLocalDateTime());
+        long days = ChronoUnit.DAYS.between( rental.getStartDate(),
+                                             rental.getEndDate());
 
         if (days <= 0) days = 1;
         return days * 100.00;
