@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>interfaces</artifactId>
+    <packaging>jar</packaging>
 
     <dependencies>
         <dependency>
