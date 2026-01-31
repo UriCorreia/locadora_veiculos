@@ -13,22 +13,36 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import java.time.temporal.ChronoUnit;
 
-public class MyPlugin implements IPricePlugin
+public class MyPlugin implements IPlugin, IPricePlugin
 {
+    @Override
     public boolean init() {
-        IUIController uiController = ICore.getInstance().getUIController();
 
-        MenuItem menuItem = uiController.createMenuItem("Menu 1", "My Menu Item");
-        menuItem.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent e) {
-                System.out.println("I've been clicked!");
-            }
-        });
-
-        uiController.createTab("new tab", new Rectangle(200,200, Color.LIGHTSTEELBLUE));
+        System.out.println("IPlugin (Plugin) classloader: "
+                + IPlugin.class.getClassLoader());
 
         return true;
+    }
+
+    public void onLoad() {
+
+        ICore core = ICore.getInstance();
+        if (core == null) {
+            System.out.println("Core ainda não inicializado.");
+            return;
+        }
+
+        IUIController uiController = core.getUIController();
+
+        MenuItem menuItem = uiController.createMenuItem("Menu 1", "My Menu Item");
+        menuItem.setOnAction((ActionEvent e) ->
+                System.out.println("I've been clicked!")
+        );
+
+        uiController.createTab(
+                "new tab",
+                new Rectangle(200, 200, Color.LIGHTSTEELBLUE)
+        );
     }
 
     @Override

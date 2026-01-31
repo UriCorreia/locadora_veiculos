@@ -1,10 +1,11 @@
-package br.edu.ifba.inf008; // Notei nos prints que sua pasta é 'shell'
+package br.edu.ifba.inf008;
 
+import br.edu.ifba.inf008.shell.PluginController;
 import br.edu.ifba.inf008.shell.Core;
 import br.edu.ifba.inf008.MariaDBProvider;
 import br.edu.ifba.inf008.interfaces.IDataProvider;
 import br.edu.ifba.inf008.interfaces.IVehiclePlugin;
-import br.edu.ifba.inf008.model.Customer; // Ajustado para 'model' (singular) conforme seu print
+import br.edu.ifba.inf008.model.Customer;
 import br.edu.ifba.inf008.model.Rental;
 import br.edu.ifba.inf008.model.Vehicle;
 import javafx.application.Application;
@@ -18,21 +19,21 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
-public class App extends Application { // Nome da classe mantido como App
+public class App extends Application {
 
     private IDataProvider dataProvider;
 
     @Override
     public void start(Stage primaryStage) {
-        // 1. Inicializa Conexão
-        // Como MariaDBProvider está na mesma pasta 'shell', não precisa de import
+
         dataProvider = new MariaDBProvider();
 
-        // 2. Componentes da Tela
+        System.out.println(" >>> TESTANDO CARREGAR PLUGINS... ");
+        PluginController.getInstance().init();
+
         Label lblCliente = new Label("Selecione o Cliente:");
         ComboBox<Customer> cmbCustomers = new ComboBox<>();
 
-        // Tenta buscar clientes. Se o banco falhar, evita fechar o app na cara
         try {
             cmbCustomers.getItems().addAll(dataProvider.getAllCustomers());
         } catch (Exception ex) {
@@ -48,7 +49,6 @@ public class App extends Application { // Nome da classe mantido como App
 
         Label lblResultado = new Label();
 
-        // 3. Ação de Buscar
         btnBuscar.setOnAction(e -> {
             Vehicle.VehicleType tipo = cmbType.getValue();
             if (tipo != null) {
@@ -66,13 +66,11 @@ public class App extends Application { // Nome da classe mantido como App
 
         Button btnAlugar = new Button("ALUGAR VEÍCULO");
 
-        // 4. Ação de Alugar
         btnAlugar.setOnAction(e -> {
             Customer cliente = cmbCustomers.getValue();
             Vehicle veiculo = listVehicles.getSelectionModel().getSelectedItem();
 
             if (cliente != null && veiculo != null) {
-                // Simulação simples de preço (Plugin entrará aqui depois)
                 BigDecimal valorEstimado = new BigDecimal("100.00");
 
                 Rental aluguel = new Rental();
@@ -85,7 +83,7 @@ public class App extends Application { // Nome da classe mantido como App
                 if (dataProvider.saveRental(aluguel)) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION, "Aluguel realizado com sucesso!");
                     alert.show();
-                    btnBuscar.fire(); // Atualiza a lista
+                    btnBuscar.fire();
                 } else {
                     Alert alert = new Alert(Alert.AlertType.ERROR, "Erro ao salvar aluguel.");
                     alert.show();
@@ -96,7 +94,6 @@ public class App extends Application { // Nome da classe mantido como App
             }
         });
 
-        // 5. Layout
         VBox root = new VBox(10);
         root.setPadding(new Insets(15));
         root.getChildren().addAll(
