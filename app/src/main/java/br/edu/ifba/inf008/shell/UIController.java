@@ -1,89 +1,70 @@
 package br.edu.ifba.inf008.shell;
 
 import br.edu.ifba.inf008.interfaces.IUIController;
-import br.edu.ifba.inf008.interfaces.ICore;
-import br.edu.ifba.inf008.shell.PluginController;
-
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.application.Platform;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.Tab;
-import javafx.geometry.Side;
 import javafx.scene.Node;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
-public class UIController extends Application implements IUIController
-{
-    private ICore core;
-    private MenuBar menuBar;
-    private TabPane tabPane;
-    private static UIController uiController;
+public class UIController implements IUIController {
 
-    public UIController() {
-    }
+    private static UIController instance;
+    private final TabPane tabPane;
+    private final MenuBar menuBar;
 
-    @Override
-    public void init() {
-        uiController = this;
+    // Construtor recebe os elementos da tela principal (criados no App.java)
+    public UIController(TabPane tabPane, MenuBar menuBar) {
+        this.tabPane = tabPane;
+        this.menuBar = menuBar;
+        instance = this;
     }
 
     public static UIController getInstance() {
-        return uiController;
+        return instance;
+    }
+
+    // --- Implementação da Interface IUIController ---
+
+    @Override
+    public boolean addTab(Tab tab) {
+        if (tabPane != null) {
+            tabPane.getTabs().add(tab);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Hello World!");
+    public boolean addMenuItem(String menuName, MenuItem menuItem) {
+        if (menuBar == null) return false;
 
-        menuBar = new MenuBar();
-
-        VBox vBox = new VBox(menuBar);
-
-        tabPane = new TabPane();
-        tabPane.setSide(Side.BOTTOM);
-
-        vBox.getChildren().addAll(tabPane);
-
-        Scene scene = new Scene(vBox, 960, 600);
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        Core.getInstance().getPluginController().init();
-    }
-
-    public MenuItem createMenuItem(String menuText, String menuItemText) {
-        // Criar o menu caso ele nao exista
-        Menu newMenu = null;
+        // 1. Tenta encontrar o menu existente
+        Menu targetMenu = null;
         for (Menu menu : menuBar.getMenus()) {
-            if (menu.getText() == menuText) {
-                newMenu = menu;
+            if (menu.getText().equals(menuName)) { // Importante: usar .equals para Strings
+                targetMenu = menu;
                 break;
             }
         }
-        if (newMenu == null) {
-            newMenu = new Menu(menuText);
-            menuBar.getMenus().add(newMenu);
+
+        // 2. Se não existir, cria um novo
+        if (targetMenu == null) {
+            targetMenu = new Menu(menuName);
+            menuBar.getMenus().add(targetMenu);
         }
 
-        // Criar o menu item neste menu
-        MenuItem menuItem = new MenuItem(menuItemText);
-        newMenu.getItems().add(menuItem);
-
-        return menuItem;
+        // 3. Adiciona o item ao menu
+        targetMenu.getItems().add(menuItem);
+        return true;
     }
 
-    public boolean createTab(String tabText, Node contents) {
-        Tab tab = new Tab();
-        tab.setText(tabText);
-        tab.setContent(contents);
-        tabPane.getTabs().add(tab);
+    // --- Métodos Utilitários (Opcionais, mas úteis para uso interno) ---
 
-        return true;
+    public boolean createTab(String tabText, Node contents) {
+        Tab tab = new Tab(tabText);
+        tab.setContent(contents);
+        return addTab(tab);
     }
 }

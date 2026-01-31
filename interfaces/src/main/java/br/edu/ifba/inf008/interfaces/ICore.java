@@ -6,6 +6,7 @@ public abstract class ICore
         return instance;
     }
 
+    public abstract IDataProvider getDataProvider();
     public abstract IUIController getUIController();
     public abstract IAuthenticationController getAuthenticationController();
     public abstract IIOController getIOController();
